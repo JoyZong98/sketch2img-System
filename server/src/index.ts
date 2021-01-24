@@ -48,7 +48,7 @@ async function main() {
       'conda activate sketch2img'
     ]))
     shell.exec(shellescape([
-      'python /Users/bytedance/Desktop/pix2pix-pipeline/toFE_sketch2img.py',
+      'python /Users/bytedance/Desktop/sketch2img-FE/pix2pix-pipeline/toFE_sketch2img.py',
       '--input',
       savePath,
       '--output',
