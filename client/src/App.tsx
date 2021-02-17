@@ -50,19 +50,26 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <div className="flex items-center justify-center p-8 text-4xl font-extralight text-gray-600">
-        Sketch2Image
+      <div className="navbar">
+        <div className="navbar-title flex items-center justify-center p-8 text-4xl font-extralight " >
+          Sketch2Image
+        </div>
       </div>
-
+      
       <div id="drawing-board" className="bg-white w-1/2 h-96 mx-auto p-4 shadow-lg"></div>
 
       <div className="flex justify-center mt-8">
         <div className="bg-blue-500 px-4 py-2 rounded text-white" onClick={handleGenerateImage}>Generate</div>
       </div>
+      
+      {/* <div>
+        <div className="bg-gray-300 w-64 h-48 mx-4 mb-4" ><img className="w-full h-full" src={`http://127.0.0.1:3000/api/works/${works[0].id}/image.png`} /></div>
+        <div className="bg-gray-300 w-64 h-48 mx-4 mb-4" ><img className="w-full h-full" src={`http://127.0.0.1:3000/api/works/${works[0].id}/image.png`} /></div>
+      </div> */}
 
       <div className="flex flex-wrap justify-center -px-4 mt-8">
          {/* eslint-disable-next-line  */}
-        {works.map((work) => <div key={work.id} className="bg-gray-300 w-64 h-48 mx-4 mb-4"><img className="w-full h-full" src={`http://127.0.0.1:3000/api/works/${work.id}/image.png`} /></div>)}
+        {works.sort((a,b)=>b.id-a.id).map((work) => <div key={work.id} className="bg-gray-300 w-64 h-48 mx-4 mb-4"><img className="w-full h-full" src={`http://127.0.0.1:3000/api/works/${work.id}/image.png`} /></div>)}
       </div>
     </div>
   );
