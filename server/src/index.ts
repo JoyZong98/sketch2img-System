@@ -8,6 +8,7 @@ import Koa from 'koa'
 import morgan from 'koa-morgan'
 import path from 'path'
 import shellescape from 'shell-escape'
+// import exec from "child_process"
 import shell from 'shelljs'
 import { createConnection, IsNull, Not } from "typeorm"
 import { v4 as uuidV4 } from 'uuid'
@@ -39,33 +40,35 @@ async function main() {
     const savePath = path.resolve(__dirname, `../files/upload/${filename}.png`)
     const generatePath = path.resolve(__dirname, `../files/generated/${filename}.png`)
     fs.writeFileSync(savePath, ctx.file.buffer)
-
     const work = new Work()
-    work.inputFilePath = savePath
-    work.outputFilePath = generatePath
-    work.save()
     shell.exec(shellescape([
-      'conda activate sketch2img'
-    ]))
-    shell.exec(shellescape([
-      'python /Users/bytedance/Desktop/sketch2img-FE/pix2pix-pipeline/toFE_sketch2img.py',
+      'python',
+      '/Users/bytedance/Desktop/sketch2img-FE/pix2pix-pipeline/toFE_sketch2img.py',
       '--input',
       savePath,
       '--output',
       generatePath
-    ]))
-    ctx.body = work;
+    ]),function(error:any,stdout:any){
+      if(stdout.length >1){
+        console.log('print in .py file',stdout);
+      }
+      if(error) {
+        console.info('error : '+error);
+      }
+      work.inputFilePath = savePath
+      work.outputFilePath = generatePath
+      work.save()
+      ctx.body = work;
+    })
   })
 
   router.get('/api/works/:workId', async (ctx) => {
     const work = await Work.findOneOrFail(ctx.params.workId)
-
     ctx.body = work
   })
 
   router.get('/api/works/:workId/image.png', async (ctx) => {
     const work = await Work.findOneOrFail(ctx.params.workId)
-
     ctx.body = fs.readFileSync(work.outputFilePath)
   })
 
