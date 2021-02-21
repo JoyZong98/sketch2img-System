@@ -49,6 +49,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/bluebird@^3.5.33":
+  version "3.5.33"
+  resolved "https://bnpm.byted.org/@types/bluebird/-/@types/bluebird-3.5.33.tgz#d79c020f283bd50bd76101d7d300313c107325fc"
+  integrity sha1-15wCDyg71QvXYQHX0wAxPBBzJfw=
+
 "@types/body-parser@*":
   version "1.19.0"
   resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.19.0.tgz#0685b3c47eb3006ffed117cdd55164b61f80538f"
@@ -408,6 +413,11 @@ block-stream@*:
   integrity sha1-E+v+d4oDIFz+A3UUgeu0szAMEmo=
   dependencies:
     inherits "~2.0.0"
+
+bluebird@^3.7.2:
+  version "3.7.2"
+  resolved "https://bnpm.byted.org/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
+  integrity sha1-nyKcFb4nJFT/qXOs4NvueaGww28=
 
 boxen@^4.2.0:
   version "4.2.0"
